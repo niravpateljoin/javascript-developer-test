@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RSS Feed Viewer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+</head>
+<body>
+<h1>RSS Feed Viewer</h1>
+<select id="feedSelector">
+    <option value="https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml">NYTimes Home</option>
+    <option value="https://feeds.bbci.co.uk/news/rss.xml">BBC News</option>
+</select>
+
+<div id="feedContainer">
+    <div id="loadingContainer"></div>
+    <div id="errorContainer"></div>
+    <div id="postsContainer"></div>
+    <div id="pagination"></div>
+</div>
+
+<script id="post-template" type="text/x-handlebars-template">
+    {{#each posts}}
+    <div class="post">
+        <h3><a href="{{link}}" target="_blank">{{title}}</a></h3>
+        <p>{{description}}</p>
+        <small>{{formatDate pubDate}}</small>
+    </div>
+    {{/each}}
+</script>
+
+<script id="loading-template" type="text/x-handlebars-template">
+    <p>Loading feed...</p>
+</script>
+
+<script id="error-template" type="text/x-handlebars-template">
+    <p>Error loading feed: {{message}}</p>
+</script>
+
+<script src="main.js"></script>
+</body>
+</html>
